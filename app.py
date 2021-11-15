@@ -8,13 +8,13 @@ app = Flask(__name__)
 def index():
     return render_template('index.html')
 
-@app.route('/plants')
-def test():
-   return render_template('plants.html')
+# @app.route('/plants')
+# def test():
+#    return render_template('plants.html')
 
-@app.route('/plants/myPlant')
-def test():
-   return 'Testing'
+# @app.route('/plants/myPlant')
+# def test():
+#    return 'Testing'
 
 if __name__ == '__main__':
     app.run(debug=True, host='0.0.0.0')
