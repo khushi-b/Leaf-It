@@ -11,7 +11,7 @@ main = Blueprint('main', __name__)
 ####################################################################
 @main.route('/') # home page that return 'index'
 def index():
-    return 'index'
+    return render_template("index.html")
 
 ####################################################################
 @main.route('/profile') # profile page that return 'profile'
