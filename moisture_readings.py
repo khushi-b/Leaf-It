@@ -1,6 +1,6 @@
 # External module imp 
 # When working on mac/windows, use this import:
-import FakeRPi.GPIO as GPIO
+import RPi.GPIO as GPIO
 # On Pi, use this import:
 #import RPi.GPIO as GPIO
 import signal
@@ -78,16 +78,26 @@ if __name__ == '__main__':
             adc_0 = get_adc(0)
             adc_1 = get_adc(1)
             sensor1 = round(adc_0, 2)
+            
             if sensor1 < 0.5:
                 moisture1 = 0
             else:
                 moisture1 = round(valmap(sensor1, 5, 3.5, 0, 100), 0)
             sensor2 = round(adc_1, 2)
+           
             if sensor2 < 0.5:
-                moisture2 = 0
+              moisture2 = 0
             else:
-                moisture2 = round(valmap(sensor2, 5, 3.5, 0, 100), 0)
-            print("Soil Moisture Sensor 1:", moisture1, "% Soil Moisture Sensor 2:", moisture2, "%")
+                moisture2 = round(valmap(sensor2, 0, 3.5, 0, 100), 0)
+               
+                moisture2=100-moisture2
+            print("Soil Moisture Sensor 2:", moisture2, "%")
+            if moisture2 < 40:
+                print("Low")
+            elif moisture2 > 60:
+                print("High")
+            else:
+                print("Good")
             if moisture1 < 40 or moisture2 < 40:
                 GPIO.output(LED1, 1)
                 GPIO.output(LED2, 0)

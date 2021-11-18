@@ -1,9 +1,10 @@
-import FakeRPi.GPIO as GPIO
+import RPi.GPIO as GPIO
 from time import sleep
 GPIO.setmode(GPIO.BOARD)
 GPIO.setup(3, GPIO.OUT)
 GPIO.setup(5, GPIO.OUT)
 GPIO.setup(7, GPIO.OUT)
+print("here")
 pwm=GPIO.PWM(7, 100)
 pwm.start(0)
 GPIO.output(3, True)
