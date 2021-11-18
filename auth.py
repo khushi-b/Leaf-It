@@ -1,7 +1,7 @@
 ####################################################################
 ##############          Import packages      #######################
 ####################################################################
-from flask import Blueprint, render_template, redirect, url_for, request, flash
+from flask import Blueprint, render_template, redirect, url_for, request, flash, session
 from werkzeug.security \
          import generate_password_hash, check_password_hash
 from models import User
@@ -65,7 +65,7 @@ def signup(): # define the sign up function
                         method='sha256'))#add the new user to the db
         db.session.add(new_user)
         db.session.commit()
-        return redirect(url_for('auth.login'))
+        return redirect(url_for('main.new_user'))
 
 ####################################################################
 @auth.route('/logout')
