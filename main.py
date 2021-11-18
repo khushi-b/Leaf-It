@@ -1,8 +1,10 @@
 ####################################################################
 ###############          Import packages         ###################
 ####################################################################
-from flask import Blueprint, render_template, flash
+from flask import Blueprint, render_template, flash, request
+from flask.helpers import url_for
 from flask_login import login_required, current_user
+from werkzeug.utils import redirect
 from __init__ import create_app, db
 
 ####################################################################
@@ -18,6 +20,16 @@ def index():
 @login_required
 def profile():
     return render_template('profile.html', name=current_user.name)
+
+####################################################################
+@main.route('/new-user') # page for new users to select plant type
+@login_required
+def new_user():
+    if request.method == "POST":
+        # update user's plant type here
+        return redirect(url_for('main.profile'))
+
+    return render_template('new_user.html')
 
 ####################################################################
 app = create_app() # we initialize our flask app using the            

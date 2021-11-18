@@ -1,4 +1,6 @@
 body {
-    background: red;
-    color: yellow;
+    background: aliceblue;
+    color: rgb(50,50,50);
+    font-family: sans-serif;
+    padding: 50px;
 }
