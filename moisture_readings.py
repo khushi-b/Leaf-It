@@ -6,7 +6,7 @@ import FakeRPi.GPIO as GPIO
 import signal
 import sys
 import time
-import spidev
+#import spidev
 
 # Pin 15 on Raspberry Pi corresponds to GPIO 22
 LED1 = 15
@@ -16,8 +16,8 @@ LED2 = 16
 spi_ch = 0
 
 # Enable SPI
-spi = spidev.SpiDev(0, spi_ch)
-spi.max_speed_hz = 1200000
+#spi = spidev.SpiDev(0, spi_ch)
+#spi.max_speed_hz = 1200000
 
 # to use Raspberry Pi board pin numbers
 GPIO.setmode(GPIO.BOARD)
@@ -99,3 +99,7 @@ if __name__ == '__main__':
         GPIO.cleanup()
 
 print("working!")
+
+def moisture_levels():
+    # return moisture readings to display on web server
+    return "Low"

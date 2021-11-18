@@ -1,0 +1,23 @@
+{% extends "layout.html" %}
+
+{% block title %}Leaf-It | Welcome!{% endblock %}
+{% block content %}
+<div>
+    <div id="select-plant">
+        <form action="" method="POST">
+            <h2>Please select your plant!</h2>
+
+                <label for="tomato">Tomato</label><br>
+                <input type="radio" name="plant_type" value="Tomato" id="tomato">
+                <img src="https://hgtvhome.sndimg.com/content/dam/images/hgtv/stock/2018/2/28/shutterstock-tomato-plant-591110411.jpg.rend.hgtvcom.616.462.suffix/1519856109178.jpeg">
+              
+
+                <label for="onion">Spring Onion</label>
+                <input type="radio" name="plant_type" value="Spring Onion" id="onion">
+                <img src="https://www.sanmarcosrecord.com/sites/sanmarcosrecord.etypegoogle4.com/files/styles/juicebox_large/public/field/image/green_onion_3.jpg?itok=d_Q_-Of4">
+              
+                <input type="submit" name ="Start Gardening!" value="Start Gardening!">
+        </form>
+    </div>
+</div>
+{% endblock %}
