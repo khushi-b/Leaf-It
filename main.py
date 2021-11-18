@@ -1,9 +1,9 @@
 ####################################################################
 ###############          Import packages         ###################
 ####################################################################
-from flask import Blueprint, render_template, flash, request, session
+from flask import Blueprint, render_template, flash, request
 # Import for Migrations
-from flask_migrate import Migrate
+from flask_migrate import Migrate, current
 from flask.helpers import url_for
 from flask_login import login_required, current_user
 from werkzeug.utils import redirect
@@ -29,7 +29,6 @@ def profile():
 
 ####################################################################
 @main.route('/new-user', methods=['GET', 'POST']) # page for new users to select plant type
-@login_required
 def new_user():
     if request.method == "POST":
         user_id = current_user.id

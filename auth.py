@@ -65,6 +65,7 @@ def signup(): # define the sign up function
                         method='sha256'))#add the new user to the db
         db.session.add(new_user)
         db.session.commit()
+        login_user(new_user)
         return redirect(url_for('main.new_user'))
 
 ####################################################################
