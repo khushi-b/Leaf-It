@@ -10,6 +10,7 @@ from werkzeug.utils import redirect
 from __init__ import create_app, db
 from models import Plant
 from moisture_readings import moisture_levels
+from moisture_readings import last_watered
 ####################################################################
 # our main blueprint
 main = Blueprint('main', __name__)
@@ -23,9 +24,16 @@ def index():
 @main.route('/profile') # profile page that return 'profile'
 @login_required
 def profile():
-    moisture_level = moisture_levels()
+    last_watered()
+    moisture_levels()
+    plant = Plant.query.filter_by(user_id=current_user.id).first()
+    moisture_level = plant.moisture_level
+    #moisture_level = moisture_levels
+    last_watered_value = plant.last_watered
+    #last_watered = last_watered
     print(moisture_level)
-    return render_template('plant_status.html', name=current_user.name, moisture_level=moisture_level)
+    print(last_watered_value)
+    return render_template('plant_status.html', name=current_user.name, moisture_level=moisture_level, last_watered=last_watered_value)
 
 ####################################################################
 @main.route('/new-user', methods=['GET', 'POST']) # page for new users to select plant type

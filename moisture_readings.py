@@ -6,6 +6,11 @@ import FakeRPi.GPIO as GPIO
 import signal
 import sys
 import time
+from datetime import datetime
+from flask_login import login_required, current_user
+from models import Plant
+from __init__ import db
+
 #import spidev
 
 # Pin 15 on Raspberry Pi corresponds to GPIO 22
@@ -101,5 +106,25 @@ if __name__ == '__main__':
 print("working!")
 
 def moisture_levels():
+    print("moisture_levels called")
     # return moisture readings to display on web server
-    return "Low"
+    plant = Plant.query.filter_by(user_id=current_user.id).first()
+    print(plant)
+    # add moisture level reading here
+    moisture_level = "Low"
+    plant.moisture_level = moisture_level
+    db.session.add(plant)
+    db.session.commit()
+
+def last_watered():
+    # return the last watered date and time
+    plant = Plant.query.filter_by(user_id=current_user.id).first()
+    print(plant)
+    now = datetime.now()
+    #dt_string = now.strftime("%d/%m/%Y %H:%M:%S")
+    # add last watered reading here
+    last_watered = now
+    print(last_watered)
+    plant.last_watered = last_watered
+    db.session.add(plant)
+    db.session.commit()
