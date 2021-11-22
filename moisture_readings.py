@@ -6,7 +6,7 @@ import RPi.GPIO as GPIO
 import signal
 import sys
 import time
-#import spidev
+import spidev
 
 # Pin 15 on Raspberry Pi corresponds to GPIO 22
 LED1 = 15
@@ -15,9 +15,9 @@ LED2 = 16
 
 spi_ch = 0
 
-# Enable SPI
-#spi = spidev.SpiDev(0, spi_ch)
-#spi.max_speed_hz = 1200000
+#Enable SPI
+spi = spidev.SpiDev(0, spi_ch)
+spi.max_speed_hz = 1200000
 
 # to use Raspberry Pi board pin numbers
 GPIO.setmode(GPIO.BOARD)
@@ -71,8 +71,9 @@ def get_adc(channel):
 
     return voltage
 
-if __name__ == '__main__':
+def moisture():
     # Report the channel 0 and channel 1 voltages to the terminal
+    GPIO.setmode(GPIO.BOARD)
     try:
         while True:
             adc_0 = get_adc(0)
@@ -94,22 +95,25 @@ if __name__ == '__main__':
             print("Soil Moisture Sensor 2:", moisture2, "%")
             if moisture2 < 40:
                 print("Low")
+                return 1
             elif moisture2 > 60:
                 print("High")
             else:
                 print("Good")
-            if moisture1 < 40 or moisture2 < 40:
-                GPIO.output(LED1, 1)
-                GPIO.output(LED2, 0)
-            else:
-                GPIO.output(LED1, 0)
-                GPIO.output(LED2, 1)
+            #if moisture1 < 40 or moisture2 < 40:
+             #   GPIO.output(LED1, 1)
+              #  GPIO.output(LED2, 0)
+            #else:
+             #   GPIO.output(LED1, 0)
+              #  GPIO.output(LED2, 1)
             time.sleep(0.5)
     finally:
         GPIO.cleanup()
 
 print("working!")
 
+#if __name__=="__main__":
+ #   moisture()
 def moisture_levels():
     # return moisture readings to display on web server
     return "Low"
