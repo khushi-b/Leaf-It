@@ -1,21 +1,16 @@
 # External module imp 
 # When working on mac/windows, use this import:
-import RPi.GPIO as GPIO
+import FakeRPi.GPIO as GPIO
 # On Pi, use this import:
 #import RPi.GPIO as GPIO
 import signal
 import sys
 import time
-<<<<<<< HEAD
-import spidev
-=======
+#import spidev
 from datetime import datetime
 from flask_login import login_required, current_user
 from models import Plant
 from __init__ import db
-
-#import spidev
->>>>>>> bc6f6236f987af2061b85112f0d58617b4022017
 
 # Pin 15 on Raspberry Pi corresponds to GPIO 22
 LED1 = 15
@@ -25,8 +20,8 @@ LED2 = 16
 spi_ch = 0
 
 #Enable SPI
-spi = spidev.SpiDev(0, spi_ch)
-spi.max_speed_hz = 1200000
+#spi = spidev.SpiDev(0, spi_ch)
+#spi.max_speed_hz = 1200000
 
 # to use Raspberry Pi board pin numbers
 GPIO.setmode(GPIO.BOARD)
