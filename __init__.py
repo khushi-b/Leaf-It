@@ -20,6 +20,7 @@ def create_app():
     app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False 
                    # deactivate Flask-SQLAlchemy track modifications
     db.init_app(app) # Initialiaze sqlite database
+    
     # The login manager contains the code that lets your application    
     # and Flask-Login work together
     login_manager = LoginManager() # Create a Login Manager instance

@@ -22,11 +22,14 @@
     
     <figure>
         <figcaption>Your audio messages:</figcaption>
+        {% for audio in recordings %}
             <audio controls>
                 <source src= {{audio}} type="audio/wav">
                     Your browser does not support the
                     audio element.
             </audio>
+            <br>
+        {% endfor %}
     </figure>
 
 </h1>

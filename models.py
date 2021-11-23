@@ -16,7 +16,8 @@ class Plant(db.Model):
     plant_type = db.Column(db.String(1000))
     last_watered = db.Column(db.DateTime)
     moisture_level = db.Column(db.String(100))
-    #audio_count = db.Column(db.Integer, default=0)
+    set_profile = db.Column(db.Boolean, default=False)
+    audio_count = db.Column(db.Integer, default=0)
 
     def __str__(self):
         return f"Plant {self.id}: {self.plant_type}"

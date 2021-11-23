@@ -2,10 +2,9 @@
 ###############          Import packages         ###################
 ####################################################################
 from flask import Blueprint, render_template, flash, request
-# Import for Migrations
-from flask_migrate import Migrate, current
 from flask.helpers import url_for
 from flask_login import login_required, current_user
+from flask_migrate import Migrate
 from werkzeug.utils import redirect
 from __init__ import create_app, db
 from models import Plant
@@ -33,30 +32,38 @@ def profile():
     last_watered_value = plant.last_watered.strftime("%d/%m/%Y %H:%M:%S")
 
     # get plant image
-    try:
-        user_file = open(f"static/user_info/user_{current_user.id}", "r").readlines()
-        set_profile = user_file[0].split(":")[1]
-        
-        if set_profile[0] == "T":
-            print("set_profile")
-            image = url_for('static', filename=f"plant_images/plant_{current_user.id}") 
-        else:
-            print("placeholder")
-            image = url_for('static', filename=f"lightbulb.png")
-
-    except:
-        user_file = open(f"static/user_info/user_{current_user.id}", "w+")
-        user_file.write("set_profile:False\n")
-        print("created")
+    if plant.set_profile:
+        print("set_profile")
+        image = url_for('static', filename=f"plant_images/plant_{current_user.id}") 
+    else:
+        print("placeholder")
         image = url_for('static', filename=f"lightbulb.png")
+    # try:
+    #     user_file = open(f"static/user_info/user_{current_user.id}", "r").readlines()
+    #     set_profile = user_file[0].split(":")[1]
+        
+    #     if set_profile[0] == "T":
+    #         print("set_profile")
+    #         image = url_for('static', filename=f"plant_images/plant_{current_user.id}") 
+    #     else:
+    #         print("placeholder")
+    #         image = url_for('static', filename=f"lightbulb.png")
+
+    # except:
+    #     user_file = open(f"static/user_info/user_{current_user.id}", "w+")
+    #     user_file.write("set_profile:False\n")
+    #     print("created")
+    #     image = url_for('static', filename=f"lightbulb.png")
         #user_file.save(os.path.join("./static/user_info", f"user_{current_user.id}"))
 
     #image = url_for('static', filename=f"plant_images/plant_{current_user.id}")
     # get audio files for user
-    audio = url_for('static', filename=f"audio/plant_{current_user.id}.wav")
-    #recordings = [audio]
+    recordings = []
+    if plant.audio_count != None:
+        for i in range(plant.audio_count):
+            recordings.append(url_for('static', filename=f"audio/plant_{current_user.id}_{i}.wav"))
 
-    return render_template('plant_status.html', name=current_user.name, moisture_level=moisture_level, last_watered=last_watered_value, image=image, audio=audio)
+    return render_template('plant_status.html', name=current_user.name, moisture_level=moisture_level, last_watered=last_watered_value, image=image, recordings=recordings)
 
 @main.route('/profile', methods=['POST'])
 def upload_file():
@@ -73,8 +80,12 @@ def upload_file():
     
     # audio
     try:
+        plant = Plant.query.filter_by(user_id=current_user.id).first()
         audio = request.files['audio_file']
-        audio.save(os.path.join("./static/audio", f"plant_{current_user.id}.wav"))
+        audio.save(os.path.join("./static/audio", f"plant_{current_user.id}_{plant.audio_count}.wav"))
+        plant.audio_count += 1
+        db.session.add(plant)
+        db.session.commit()
     except:
         pass
 
@@ -96,10 +107,8 @@ def new_user():
 ####################################################################
 app = create_app() # we initialize our flask app using the            
                    #__init__.py function
+migrate = Migrate(app, db)
 ####################################################################
 if __name__ == '__main__':
     db.create_all(app = create_app()) # create the SQLite database
     app.run(debug=True) # run the flask app on debug mode
-
-# Settings for migrations
-migrate = Migrate(app, db)
