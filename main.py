@@ -38,25 +38,7 @@ def profile():
     else:
         print("placeholder")
         image = url_for('static', filename=f"lightbulb.png")
-    # try:
-    #     user_file = open(f"static/user_info/user_{current_user.id}", "r").readlines()
-    #     set_profile = user_file[0].split(":")[1]
-        
-    #     if set_profile[0] == "T":
-    #         print("set_profile")
-    #         image = url_for('static', filename=f"plant_images/plant_{current_user.id}") 
-    #     else:
-    #         print("placeholder")
-    #         image = url_for('static', filename=f"lightbulb.png")
 
-    # except:
-    #     user_file = open(f"static/user_info/user_{current_user.id}", "w+")
-    #     user_file.write("set_profile:False\n")
-    #     print("created")
-    #     image = url_for('static', filename=f"lightbulb.png")
-        #user_file.save(os.path.join("./static/user_info", f"user_{current_user.id}"))
-
-    #image = url_for('static', filename=f"plant_images/plant_{current_user.id}")
     # get audio files for user
     recordings = []
     if plant.audio_count != None:
@@ -101,7 +83,6 @@ def new_user():
         db.session.commit()
         flash('Record was successfully added')
         return redirect(url_for('main.profile'))
-    print("here")
     return render_template('new_user.html')
 
 ####################################################################
