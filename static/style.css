@@ -1,8 +1,77 @@
 body {
-    background: aliceblue;
+    background-image: url(https://image.freepik.com/free-photo/golden-background-with-palm-tree_53876-108441.jpg);
+    /* background: aliceblue; */
     color: rgb(50,50,50);
     font-family: sans-serif;
     padding: 50px;
+}
+
+h1 {
+  position: absolute;
+  width: 341px;
+  height: 19px;
+  left: 427px;
+  top: 188px;
+
+  font-family: serif;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 24px;
+  line-height: 29px;
+  text-align: center;
+
+  color: #000000;
+}
+
+h2 /* Please select your plant! */ {
+  position: absolute;
+  width: 341px;
+  height: 19px;
+  left: 405px;
+  top: 138px;
+
+  font-family: serif;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 24px;
+  line-height: 29px;
+  text-align: center;
+
+  color: #000000;
+
+}
+
+/* Opaque rectangle for text */
+.rectangle {
+  position: absolute;
+  width: 920px;
+  height: 540px;
+  left: 116px;
+  top: 80px;
+
+  background: rgba(255, 255, 255, 0.35);
+  filter: blur(4px);
+  border-radius: 120px;
+}
+
+/* Rectangle for plant names and subheadings
+div {
+  position: absolute;
+  width: 170px;
+  height: 27px;
+  left: 347px;
+  top: 543px;
+
+  background: #FFFAF3;
+  border-radius: 60px;
+}
+*/
+
+/* Position for images */
+img {
+  left: 628px;
+  top: 311px;
+  border-radius: 60px;
 }
 
 /* new_user plant form ---------------------------- */
