@@ -92,4 +92,4 @@ migrate = Migrate(app, db)
 ####################################################################
 if __name__ == '__main__':
     db.create_all(app = create_app()) # create the SQLite database
-    app.run(debug=True) # run the flask app on debug mode
+    app.run(host="0.0.0.0",port="80",debug=True) # run the flask app on debug mode
