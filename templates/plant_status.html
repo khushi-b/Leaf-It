@@ -1,12 +1,15 @@
 {% extends "layout.html" %}
 {% block title %}Leaf-It | My Plant{% endblock %}
 {% block content %}
+<div class="rectangle">
 <h1 class="title">
     Welcome, {{name}}!
     
     Moisture: {{moisture_level}}
+    <img src="https://cdn-icons.flaticon.com/png/512/4183/premium/4183063.png?token=exp=1637600248~hmac=f83d0a1395a76f04008e30f5931b4bdc" alt="Moisture Level" style="width:204px; height:200.28px">
 
     Last watered: {{last_watered}}
+    <img src="https://cdn-icons.flaticon.com/png/512/2871/premium/2871327.png?token=exp=1637597087~hmac=2eb45d34879a8721f93b901a0a5f750c" alt="Last Watered" style="width:184px; height: 200.28px">
 
     <img src = {{image}} alt='' width=400px height=200px>
 
@@ -33,4 +36,5 @@
     </figure>
 
 </h1>
+</div>
 {% endblock %}
