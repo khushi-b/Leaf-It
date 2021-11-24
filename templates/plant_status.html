@@ -10,6 +10,31 @@
 
     Last watered: {{last_watered}}
     <img src="https://cdn-icons.flaticon.com/png/512/2871/premium/2871327.png?token=exp=1637597087~hmac=2eb45d34879a8721f93b901a0a5f750c" alt="Last Watered" style="width:184px; height: 200.28px">
+
+    <img src = {{image}} alt='' width=400px height=200px>
+
+    <form method="POST" action="" enctype="multipart/form-data">
+    <p><input type="file" name="image_file" accept = ".jpg, .jpeg, .png"></p>
+    <p><input type="submit" value="Submit"></p>
+    </form>
+
+    <form method="POST" action="" enctype="multipart/form-data">
+    <p><input type="file" name="audio_file" accept = ".wav, .mp3"></p>
+    <p><input type="submit" value="Submit"></p>
+    </form>
+    
+    <figure>
+        <figcaption>Your audio messages:</figcaption>
+        {% for audio in recordings %}
+            <audio controls>
+                <source src= {{audio}} type="audio/wav">
+                    Your browser does not support the
+                    audio element.
+            </audio>
+            <br>
+        {% endfor %}
+    </figure>
+
 </h1>
 </div>
 {% endblock %}
