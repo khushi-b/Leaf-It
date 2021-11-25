@@ -11,10 +11,10 @@ if __name__ =="__main__":
             
             pwm=GPIO.PWM(7, 100)
             pwm.start(0)
-            pwm.ChangeDutyCycle(10)
+            pwm.ChangeDutyCycle(70)
             GPIO.output(3, True)
             GPIO.output(5, False)
-            pwm.ChangeDutyCycle(10)
+            pwm.ChangeDutyCycle(70)
             GPIO.output(7, True)
             sleep(5)
             print("here")

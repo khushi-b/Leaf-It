@@ -6,7 +6,7 @@ import RPi.GPIO as GPIO
 import signal
 import sys
 import time
-#import spidev
+import spidev
 from datetime import datetime
 from flask_login import login_required, current_user
 from models import Plant
@@ -20,8 +20,8 @@ LED2 = 16
 spi_ch = 0
 
 #Enable SPI
-#spi = spidev.SpiDev(0, spi_ch)
-#spi.max_speed_hz = 1200000
+spi = spidev.SpiDev(0, spi_ch)
+spi.max_speed_hz = 1200000
 
 # to use Raspberry Pi board pin numbers
 GPIO.setmode(GPIO.BOARD)
@@ -96,14 +96,16 @@ def moisture():
                 moisture2 = round(valmap(sensor2, 0, 3.5, 0, 100), 0)
                
                 moisture2=100-moisture2
-            print("Soil Moisture Sensor 2:", moisture2, "%")
+            print("Soil Moisture Sensor:", moisture2, "%")
             if moisture2 < 40:
                 print("Low")
                 return 1
             elif moisture2 > 60:
                 print("High")
+                return 2
             else:
                 print("Good")
+                return 3
             #if moisture1 < 40 or moisture2 < 40:
              #   GPIO.output(LED1, 1)
               #  GPIO.output(LED2, 0)
