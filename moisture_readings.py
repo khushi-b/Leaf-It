@@ -1,8 +1,8 @@
 # External module imp 
 # When working on mac/windows, use this import:
-import FakeRPi.GPIO as GPIO
+#import FakeRPi.GPIO as GPIO
 # On Pi, use this import:
-#import RPi.GPIO as GPIO
+import RPi.GPIO as GPIO
 import signal
 import sys
 import time

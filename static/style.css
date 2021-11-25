@@ -217,8 +217,6 @@ input::-webkit-input-placeholder {
   [type=radio]:checked + img {
     outline: 2px solid #f00;
   }
-<<<<<<< HEAD
-=======
 
 #plant-media {
   padding:0 50px;
@@ -291,4 +289,3 @@ input::-webkit-input-placeholder {
   height: auto;
   border-radius: 15px;
 }
->>>>>>> ff4e4d501a23b4bf35fa7af26166e87aa73d4327
