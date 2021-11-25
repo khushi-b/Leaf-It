@@ -17,7 +17,8 @@ main = Blueprint('main', __name__)
 ####################################################################
 @main.route('/') # home page that return 'index'
 def index():
-    return render_template("index.html")
+    image = url_for('static', filename=f"backgroundImg.png") 
+    return render_template("index.html", image=image)
 
 ####################################################################
 @main.route('/profile', methods=['GET']) # profile page that return 'profile'
@@ -30,6 +31,7 @@ def profile():
     plant = Plant.query.filter_by(user_id=current_user.id).first()
     moisture_level = plant.moisture_level
     last_watered_value = plant.last_watered.strftime("%d/%m/%Y %H:%M:%S")
+    plant_type = plant.plant_type.lower()
 
     # get plant image
     if plant.set_profile:
@@ -37,7 +39,7 @@ def profile():
         image = url_for('static', filename=f"plant_images/plant_{current_user.id}") 
     else:
         print("placeholder")
-        image = url_for('static', filename=f"lightbulb.png")
+        image = url_for('static', filename=f"{plant.plant_type}.jpg")
 
     # get audio files for user
     recordings = []
@@ -45,7 +47,7 @@ def profile():
         for i in range(plant.audio_count):
             recordings.append(url_for('static', filename=f"audio/plant_{current_user.id}_{i}.wav"))
 
-    return render_template('plant_status.html', name=current_user.name, moisture_level=moisture_level, last_watered=last_watered_value, image=image, recordings=recordings)
+    return render_template('plant_status.html', name=current_user.name, moisture_level=moisture_level, last_watered=last_watered_value, image=image, recordings=recordings, plant=plant_type)
 
 @main.route('/profile', methods=['POST'])
 def upload_file():

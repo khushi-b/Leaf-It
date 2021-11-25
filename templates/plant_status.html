@@ -1,40 +1,52 @@
 {% extends "layout.html" %}
 {% block title %}Leaf-It | My Plant{% endblock %}
 {% block content %}
-<div class="rectangle">
-<h1 class="title">
-    Welcome, {{name}}!
+<div id="bkgd-img">
+    <img src="/static/bkgd2.png">
+</div>
+<div id="profile">
+    <h1>Welcome, {{name}}!</h1>
+    <h3>See how your {{plant}} is doing</h3>
     
-    Moisture: {{moisture_level}}
-    <img src="https://cdn-icons.flaticon.com/png/512/4183/premium/4183063.png?token=exp=1637600248~hmac=f83d0a1395a76f04008e30f5931b4bdc" alt="Moisture Level" style="width:204px; height:200.28px">
+    <div id="greeting">
+        <h3>Moisture: {{moisture_level}}</h3>
+        <h3>Last watered: {{last_watered}}</h3>
+    </div>
 
-    Last watered: {{last_watered}}
-    <img src="https://cdn-icons.flaticon.com/png/512/2871/premium/2871327.png?token=exp=1637597087~hmac=2eb45d34879a8721f93b901a0a5f750c" alt="Last Watered" style="width:184px; height: 200.28px">
-
-    <img src = {{image}} alt='' width=400px height=200px>
-
-    <form method="POST" action="" enctype="multipart/form-data">
-    <p><input type="file" name="image_file" accept = ".jpg, .jpeg, .png"></p>
-    <p><input type="submit" value="Submit"></p>
-    </form>
-
-    <form method="POST" action="" enctype="multipart/form-data">
-    <p><input type="file" name="audio_file" accept = ".wav, .mp3"></p>
-    <p><input type="submit" value="Submit"></p>
-    </form>
+    <div id="plant-media">
+        <div id="images">
+            <div id="plant-img"  class="plant-media-section">
+                <img src = {{image}}>
+            </div>
     
-    <figure>
-        <figcaption>Your audio messages:</figcaption>
-        {% for audio in recordings %}
-            <audio controls>
-                <source src= {{audio}} type="audio/wav">
-                    Your browser does not support the
-                    audio element.
-            </audio>
-            <br>
-        {% endfor %}
-    </figure>
+            <form method="POST" action="" enctype="multipart/form-data">
+            <h4>Upload Plant Profile Pic!</h4><br>
+            <input type="file" name="image_file" accept = ".jpg, .jpeg, .png" class="plant-upload" id="image-upload">
+            <p><input type="submit" value="Submit" class="btn"></p>
+            </form>
+        </div>
+        
+        <div id="audio">
+            <div id="audio-msgs" class="plant-media-section">
+                <h3>Your audio messages:</h3>
+                {% for audio in recordings %}
+                <audio controls>
+                    <source src= {{audio}} type="audio/wav">
+                        Your browser does not support the
+                        audio element.
+                </audio>
+                <br>
+            {% else %}
+            You don't have any plant messages recorded.
+            {% endfor %}
+            </div>
+            <form method="POST" action="" enctype="multipart/form-data">
+                <h4>Upload audio messages for your plant!</h4><br>
+                <p><input type="file" name="audio_file" accept = ".wav, .mp3"></p>
+                <p><input type="submit" value="Submit" class="btn"></p>
+            </form>
+        </div>
+    </div>
 
-</h1>
 </div>
 {% endblock %}
