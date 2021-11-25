@@ -3,7 +3,7 @@ import moisture_readings
 from time import sleep
 if __name__ =="__main__":
     while True:
-        if moisture_readings.moisture()==1:  
+        if moisture_readings.moisture()=="Low":  
             GPIO.setmode(GPIO.BOARD)
             GPIO.setup(3, GPIO.OUT)
             GPIO.setup(5, GPIO.OUT)
