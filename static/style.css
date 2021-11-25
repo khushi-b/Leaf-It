@@ -287,4 +287,5 @@ input::-webkit-input-placeholder {
 #plant-img img{
   width: 400px;
   height: auto;
+  border-radius: 15px;
 }
