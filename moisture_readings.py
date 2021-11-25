@@ -126,7 +126,13 @@ def moisture_levels():
     plant = Plant.query.filter_by(user_id=current_user.id).first()
     print(plant)
     # add moisture level reading here
-    moisture_level = "Low"
+    moisture_level = moisture()
+    if moisture_level == 1:
+        moisture_level = "Low"
+    elif moisture_level == 2:
+        moisture_level = "High"
+    else:
+        moisture_level = "Good"
     plant.moisture_level = moisture_level
     db.session.add(plant)
     db.session.commit()
@@ -135,11 +141,12 @@ def last_watered():
     # return the last watered date and time
     plant = Plant.query.filter_by(user_id=current_user.id).first()
     print(plant)
-    now = datetime.now()
-    #dt_string = now.strftime("%d/%m/%Y %H:%M:%S")
-    # add last watered reading here
-    last_watered = now
-    print(last_watered)
-    plant.last_watered = last_watered
-    db.session.add(plant)
-    db.session.commit()
+    if moisture() == 1:
+        now = datetime.now()
+        #dt_string = now.strftime("%d/%m/%Y %H:%M:%S")
+        # add last watered reading here
+        last_watered = now
+        print(last_watered)
+        plant.last_watered = last_watered
+        db.session.add(plant)
+        db.session.commit()
