@@ -1,43 +1,19 @@
 body {
-    background-image: url(https://image.freepik.com/free-photo/golden-background-with-palm-tree_53876-108441.jpg);
-    /* background: aliceblue; */
+    /* background-image: url(https://image.freepik.com/free-photo/golden-background-with-palm-tree_53876-108441.jpg); */
+    background: beige;
     color: rgb(50,50,50);
-    font-family: sans-serif;
+    font-family: 'Montserrat', sans-serif;
     padding: 50px;
 }
 
 h1 {
-  position: absolute;
-  width: 341px;
-  height: 19px;
-  left: 427px;
-  top: 188px;
-
-  font-family: serif;
-  font-style: normal;
-  font-weight: normal;
-  font-size: 24px;
-  line-height: 29px;
-  text-align: center;
-
-  color: #000000;
+  font-size: 48px;
+  margin:50px 0;
 }
 
 h2 /* Please select your plant! */ {
-  position: absolute;
-  width: 341px;
-  height: 19px;
-  left: 405px;
-  top: 138px;
-
-  font-family: serif;
-  font-style: normal;
-  font-weight: normal;
-  font-size: 24px;
-  line-height: 29px;
-  text-align: center;
-
-  color: #000000;
+  font-size: 36px;
+  margin:20px 0;
 
 }
 
@@ -52,6 +28,18 @@ h2 /* Please select your plant! */ {
   background: rgba(255, 255, 255, 0.35);
   filter: blur(4px);
   border-radius: 120px;
+}
+
+a, a:visited{
+  color: rgb(50,50,50);
+}
+
+a {
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration:underline;
 }
 
 /* Rectangle for plant names and subheadings
@@ -69,9 +57,59 @@ div {
 
 /* Position for images */
 img {
-  left: 628px;
-  top: 311px;
+  
   border-radius: 60px;
+}
+
+.center-box {
+  position:relative;
+  top:50%;
+  width:-webkit-fill-available;
+  text-align: center;
+}
+
+.buttons li {
+  margin-right: 5px;
+  list-style-type: none;
+  display: inline;
+}
+
+#login, #signup {
+  width: -webkit-fill-available;
+  padding: 10px;
+  text-align: center;
+  position: absolute;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  left: 50%;
+}
+
+input, textarea {
+  outline: none;
+  border: silver 1px solid;
+  border-radius: 20px;
+  margin: 5px;
+  padding: 5px;
+  font: 14px 'Montserrat', sans-serif;
+}
+
+input::-webkit-input-placeholder {
+  font: 14px 'Montserrat', sans-serif;
+}
+
+.btn {
+  border-radius: 20px;
+  border-color: transparent;
+  background-color: rgb(84, 207, 133);
+  outline: none;
+  margin: 10px;
+  padding: 10px;
+  cursor: pointer;
+  font: 14px 'Montserrat', sans-serif;
+}
+
+.btn:hover {
+  background-color: rgb(53, 182, 104);
 }
 
 /* new_user plant form ---------------------------- */

@@ -1,8 +1,12 @@
-<html>
-    <body>
-        <head>
-            <link rel="stylesheet" href='/static/style.css' />
-        </head>
-        <h1>My website</h1>
-    </body>
-</html>
+{% extends "layout.html" %}
+{% block title %}Leaf-It | Your Favourite Plant-Sitter{% endblock %}
+{% block content %}
+<div class="center-box">
+    <h1>Leaf-It</h1>
+    <h2>Got a plant and no time? Leaf it to us.</h2>
+    <ul class="buttons">
+        <li><a href="{{ url_for('auth.login') }}" class="btn">Log In</a></li>
+        <li><a href="{{ url_for('auth.login') }}" class="btn">Sign Up</a></li>
+    </ul>
+</div>
+{% endblock %}
