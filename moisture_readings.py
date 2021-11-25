@@ -11,6 +11,7 @@ from datetime import datetime
 from flask_login import login_required, current_user
 from models import Plant
 from __init__ import db
+from motor import run_motor
 
 # Pin 15 on Raspberry Pi corresponds to GPIO 22
 LED1 = 15

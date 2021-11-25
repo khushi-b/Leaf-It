@@ -9,6 +9,7 @@ from werkzeug.utils import redirect
 from __init__ import create_app, db
 from models import Plant
 from moisture_readings import moisture_levels, last_watered
+from motor import run_motor
 import os
 ####################################################################
 # our main blueprint
@@ -17,14 +18,15 @@ main = Blueprint('main', __name__)
 ####################################################################
 @main.route('/') # home page that return 'index'
 def index():
-    image = url_for('static', filename=f"backgroundImg.png") 
+    image = url_for('static', filename=f"backgroundImg.png")
+    run_motor()
     return render_template("index.html", image=image)
 
 ####################################################################
 @main.route('/profile', methods=['GET']) # profile page that return 'profile'
 @login_required
 def profile():
-    # update moisture and last_watered data
+    # update moisture and last_watered dat
     last_watered()
     moisture_levels()
 
@@ -93,5 +95,5 @@ app = create_app() # we initialize our flask app using the
 migrate = Migrate(app, db)
 ####################################################################
 if __name__ == '__main__':
-    db.create_all(app = create_app()) # create the SQLite database
+    db.create_all(app = create_app()) # create the SQLite databas
     app.run(host="0.0.0.0",port="80",debug=True) # run the flask app on debug mode

@@ -1,15 +1,16 @@
 import RPi.GPIO as GPIO
 import moisture_readings
 from time import sleep
-if __name__ =="__main__":
+def run_motor():
+    print("top")
     while True:
-        if moisture_readings.moisture()=="Low":  
+        if moisture_readings.moisture()== 1:  
             GPIO.setmode(GPIO.BOARD)
             GPIO.setup(3, GPIO.OUT)
             GPIO.setup(5, GPIO.OUT)
             GPIO.setup(7, GPIO.OUT)
             
-            pwm=GPIO.PWM(7, 100)
+            #pwm=GPIO.PWM(7, 100)
             pwm.start(0)
             pwm.ChangeDutyCycle(70)
             GPIO.output(3, True)
