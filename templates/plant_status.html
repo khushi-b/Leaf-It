@@ -31,7 +31,7 @@
                 <h3>Your audio messages:</h3>
                 {% for audio in recordings %}
                 <audio controls>
-                    <source src= {{audio}} type="audio/wav">
+                    <source src= {{audio}} type="audio/wav" class="audio-clip" data-id={{loop.index}} data-max={{loop.length}}>
                         Your browser does not support the
                         audio element.
                 </audio>
@@ -49,4 +49,23 @@
     </div>
 
 </div>
+<script>
+    // get all audio msgs
+    const audio = document.querySelectorAll(".audio-clip");
+    const max = audio[0].dataset.max;
+    console.log(max);
+    // play first one on load
+    var index = 0;
+    var msg = new Audio(audio[index].src);
+    msg.play();
+    // play next one every 0.5 hour
+    setInterval(() => {
+        if (index == max - 1) index = 0;
+        else index++;
+        var msg = new Audio(audio[index].src);
+        msg.play();
+        console.log("play");
+    }, 1800000
+    )
+</script>
 {% endblock %}
