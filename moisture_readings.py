@@ -11,7 +11,8 @@ from datetime import datetime
 from flask_login import login_required, current_user
 from models import Plant
 from __init__ import db
-from motor import run_motor
+#from motor import get_last_watered
+#from motor import run_motor
 
 # Pin 15 on Raspberry Pi corresponds to GPIO 22
 LED1 = 15
@@ -98,10 +99,10 @@ def moisture():
                
                 moisture2=100-moisture2
             print("Soil Moisture Sensor:", moisture2, "%")
-            if moisture2 < 40:
+            if moisture2 < 60:
                 print("Low")
                 return 1
-            elif moisture2 > 60:
+            elif moisture2 > 80:
                 print("High")
                 return 2
             else:
@@ -142,7 +143,7 @@ def last_watered():
     # return the last watered date and time
     plant = Plant.query.filter_by(user_id=current_user.id).first()
     print(plant)
-    if moisture() == 1:
+    if moisture() == 1 or plant.last_watered == None:
         now = datetime.now()
         #dt_string = now.strftime("%d/%m/%Y %H:%M:%S")
         # add last watered reading here

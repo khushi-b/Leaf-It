@@ -9,7 +9,7 @@ from werkzeug.utils import redirect
 from __init__ import create_app, db
 from models import Plant
 from moisture_readings import moisture_levels, last_watered
-from motor import run_motor
+#from motor import run_motor
 import os
 ####################################################################
 # our main blueprint
@@ -19,7 +19,7 @@ main = Blueprint('main', __name__)
 @main.route('/') # home page that return 'index'
 def index():
     image = url_for('static', filename=f"backgroundImg.png")
-    run_motor()
+    #run_motor()
     return render_template("index.html", image=image)
 
 ####################################################################
@@ -58,9 +58,13 @@ def upload_file():
         image = request.files['image_file']
         if image.filename != '':
             image.save(os.path.join("./static/plant_images", f"plant_{current_user.id}"))
-            user_file = open(f"user_{current_user.id}", "w+")
-            user_file.write("set_profile:True\n")
-            user_file.close()
+            plant = Plant.query.filter_by(user_id=current_user.id).first()
+            plant.set_profile = True
+            db.session.add(plant)
+            db.session.commit()
+#             user_file = open(f"user_{current_user.id}", "w+")
+#             user_file.write("set_profile:True\n")
+#             user_file.close()
     except:
         pass
     
