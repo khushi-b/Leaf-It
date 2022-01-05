@@ -1,12 +1,18 @@
 # External module imp 
 # When working on mac/windows, use this import:
-import FakeRPi.GPIO as GPIO
+#import FakeRPi.GPIO as GPIO
 # On Pi, use this import:
-#import RPi.GPIO as GPIO
+import RPi.GPIO as GPIO
 import signal
 import sys
 import time
 import spidev
+from datetime import datetime
+from flask_login import login_required, current_user
+from models import Plant
+from __init__ import db
+#from motor import get_last_watered
+#from motor import run_motor
 
 # Pin 15 on Raspberry Pi corresponds to GPIO 22
 LED1 = 15
@@ -15,7 +21,7 @@ LED2 = 16
 
 spi_ch = 0
 
-# Enable SPI
+#Enable SPI
 spi = spidev.SpiDev(0, spi_ch)
 spi.max_speed_hz = 1200000
 
@@ -71,31 +77,78 @@ def get_adc(channel):
 
     return voltage
 
-if __name__ == '__main__':
+def moisture():
     # Report the channel 0 and channel 1 voltages to the terminal
+    GPIO.setmode(GPIO.BOARD)
     try:
         while True:
             adc_0 = get_adc(0)
             adc_1 = get_adc(1)
             sensor1 = round(adc_0, 2)
+            
             if sensor1 < 0.5:
                 moisture1 = 0
             else:
                 moisture1 = round(valmap(sensor1, 5, 3.5, 0, 100), 0)
             sensor2 = round(adc_1, 2)
+           
             if sensor2 < 0.5:
-                moisture2 = 0
+              moisture2 = 0
             else:
-                moisture2 = round(valmap(sensor2, 5, 3.5, 0, 100), 0)
-            print("Soil Moisture Sensor 1:", moisture1, "% Soil Moisture Sensor 2:", moisture2, "%")
-            if moisture1 < 40 or moisture2 < 40:
-                GPIO.output(LED1, 1)
-                GPIO.output(LED2, 0)
+                moisture2 = round(valmap(sensor2, 0, 3.5, 0, 100), 0)
+               
+                moisture2=100-moisture2
+            print("Soil Moisture Sensor:", moisture2, "%")
+            if moisture2 < 60:
+                print("Low")
+                return 1
+            elif moisture2 > 80:
+                print("High")
+                return 2
             else:
-                GPIO.output(LED1, 0)
-                GPIO.output(LED2, 1)
+                print("Good")
+                return 3
+            #if moisture1 < 40 or moisture2 < 40:
+             #   GPIO.output(LED1, 1)
+              #  GPIO.output(LED2, 0)
+            #else:
+             #   GPIO.output(LED1, 0)
+              #  GPIO.output(LED2, 1)
             time.sleep(0.5)
     finally:
         GPIO.cleanup()
 
 print("working!")
+
+#if __name__=="__main__":
+ #   moisture()
+def moisture_levels():
+    print("moisture_levels called")
+    # return moisture readings to display on web server
+    plant = Plant.query.filter_by(user_id=current_user.id).first()
+    print(plant)
+    # add moisture level reading here
+    moisture_level = moisture()
+    if moisture_level == 1:
+        moisture_level = "Low"
+    elif moisture_level == 2:
+        moisture_level = "High"
+    else:
+        moisture_level = "Good"
+    plant.moisture_level = moisture_level
+    db.session.add(plant)
+    db.session.commit()
+
+def last_watered():
+    # return the last watered date and time
+    plant = Plant.query.filter_by(user_id=current_user.id).first()
+    print(plant)
+    if moisture() == 1 or plant.last_watered == None:
+        now = datetime.now()
+        #dt_string = now.strftime("%d/%m/%Y %H:%M:%S")
+        # add last watered reading here
+        last_watered = now
+        print(last_watered)
+        plant.last_watered = last_watered
+        db.session.add(plant)
+        db.session.commit()

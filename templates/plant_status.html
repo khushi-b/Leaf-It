@@ -1,0 +1,71 @@
+{% extends "layout.html" %}
+{% block title %}Leaf-It | My Plant{% endblock %}
+{% block content %}
+<div id="bkgd-img">
+    <img src="/static/bkgd2.png">
+</div>
+<div id="profile">
+    <h1>Welcome, {{name}}!</h1>
+    <h3>See how your {{plant}} is doing</h3>
+    
+    <div id="greeting">
+        <h3>Moisture: {{moisture_level}}</h3>
+        <h3>Last watered: {{last_watered}}</h3>
+    </div>
+
+    <div id="plant-media">
+        <div id="images">
+            <div id="plant-img"  class="plant-media-section">
+                <img src = {{image}}>
+            </div>
+    
+            <form method="POST" action="" enctype="multipart/form-data">
+            <h4>Upload Plant Profile Pic!</h4><br>
+            <input type="file" name="image_file" accept = ".jpg, .jpeg, .png" class="plant-upload" id="image-upload">
+            <p><input type="submit" value="Submit" class="btn"></p>
+            </form>
+        </div>
+        
+        <div id="audio">
+            <div id="audio-msgs" class="plant-media-section">
+                <h3>Your audio messages:</h3>
+                {% for audio in recordings %}
+                <audio controls>
+                    <source src= {{audio}} type="audio/wav" class="audio-clip" data-id={{loop.index}} data-max={{loop.length}}>
+                        Your browser does not support the
+                        audio element.
+                </audio>
+                <br>
+            {% else %}
+            You don't have any plant messages recorded.
+            {% endfor %}
+            </div>
+            <form method="POST" action="" enctype="multipart/form-data">
+                <h4>Upload audio messages for your plant!</h4><br>
+                <p><input type="file" name="audio_file" accept = ".wav, .mp3"></p>
+                <p><input type="submit" value="Submit" class="btn"></p>
+            </form>
+        </div>
+    </div>
+
+</div>
+<script>
+    // get all audio msgs
+    const audio = document.querySelectorAll(".audio-clip");
+    const max = audio[0].dataset.max;
+    console.log(max);
+    // play first one on load
+    var index = 0;
+    var msg = new Audio(audio[index].src);
+    msg.play();
+    // play next one every 0.5 hour
+    setInterval(() => {
+        if (index == max - 1) index = 0;
+        else index++;
+        var msg = new Audio(audio[index].src);
+        msg.play();
+        console.log("play");
+    }, 1800000
+    )
+</script>
+{% endblock %}

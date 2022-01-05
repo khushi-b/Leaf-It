@@ -1,0 +1,15 @@
+{% extends "layout.html" %}
+{% block title %}Leaf-It | Your Favourite Plant-Sitter{% endblock %}
+{% block content %}
+<div class="center-box">
+    <h1 id="title">Leaf-It</h1>
+    <!-- <img src = "https://icon-library.com/images/plant-icon/plant-icon-29.jpg"> -->
+    <!-- <img src = "https://www.iconpacks.net/icons/2/free-plant-icon-1573-thumb.png"> -->
+    <img id="coverImage" src = "/static/icon.png">
+    <h2>Got a plant and no time? <strong>Leaf it</strong> to us.</h2>
+    <ul class="buttons">
+        <li><a href="{{ url_for('auth.login') }}" class="btn">Log In</a></li>
+        <li><a href="{{ url_for('auth.signup') }}" class="btn">Sign Up</a></li>
+    </ul>
+</div>
+{% endblock %}

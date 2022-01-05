@@ -1,0 +1,291 @@
+body {
+    /* background-image: url('bkgd.png');
+    background-repeat: no-repeat;
+    background-size:cover; */
+    background: white;
+    color: rgb(50,50,50);
+    font-family: 'Montserrat', sans-serif;
+    padding: 50px;
+}
+
+#bkgd-img {
+  position:fixed;
+  z-index: -1;
+  width:100%;
+  height:100%;
+  margin:0;
+  padding:0;
+  top:0;
+  bottom:0;
+  left:0;
+  right:0;
+}
+
+#bkgd-img img {
+  width:100%;
+  height:100%;
+  padding:0;
+  margin:0;
+  border-radius: 0;
+}
+
+h1 {
+  font-size: 48px;
+  margin:50px 0;
+  text-align: center;
+}
+
+h4 {
+  text-align: center;
+}
+
+h2 /* Please select your plant! */ {
+  font-size: 36px;
+  margin:20px 0;
+}
+
+.navbar-item {
+  margin-right: 20px;
+}
+
+/* Opaque rectangle for text */
+/* .rectangle {
+  position: absolute;
+  width: 920px;
+  height: 540px;
+  left: 116px;
+  top: 80px;
+
+  background: rgba(255, 255, 255, 0.35);
+  filter: blur(4px);
+  border-radius: 120px;
+} */
+
+a, a:visited{
+  color: rgb(50,50,50);
+}
+
+a {
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration:underline;
+}
+
+/* Rectangle for plant names and subheadings
+div {
+  position: absolute;
+  width: 170px;
+  height: 27px;
+  left: 347px;
+  top: 543px;
+
+  background: #FFFAF3;
+  border-radius: 60px;
+}
+*/
+
+/* Position for images */
+img {
+  
+  border-radius: 60px;
+}
+
+#coverImage{
+  border-radius: 60px;
+  width: 200px;
+  height: auto;
+}
+
+.center-box {
+  position:relative;
+  top:50%;
+  width:-webkit-fill-available;
+  text-align: center;
+}
+
+.center-box h2 {
+  margin-top: 60px;
+  margin-bottom: 50px;
+  color:rgb(50,50,50);
+}
+
+strong {
+  color:#387771ff;
+}
+
+#title {
+  font-size: 72px;
+  color:#387771ff;
+}
+
+.buttons li {
+  margin-right: 10px;
+  list-style-type: none;
+  display: inline;
+}
+
+#login, #signup {
+  width: -webkit-fill-available;
+  padding: 10px;
+  text-align: center;
+  position: absolute;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  left: 50%;
+}
+
+input, textarea {
+  outline: none;
+  border: silver 1px solid;
+  border-radius: 20px;
+  margin: 5px;
+  padding: 5px;
+  font: 14px 'Montserrat', sans-serif;
+}
+
+input::-webkit-input-placeholder {
+  font: 14px 'Montserrat', sans-serif;
+}
+
+.btn {
+  border-radius: 20px;
+  border-color: transparent;
+  background-color: #387771ff;
+  color: white;
+  outline: none;
+  margin: 10px;
+  padding: 10px;
+  cursor: pointer;
+  font: 14px 'Montserrat', sans-serif;
+}
+
+.buttons a, .buttons a:hover, .buttons a:visited{
+  color: white;
+}
+
+.btn:hover {
+  background-color: rgb(53, 182, 104);
+}
+
+.plant-options {
+  width: -webkit-fill-available;
+  display: flex;
+  justify-content: center;
+  margin-bottom: 100px;
+}
+
+.plant-options li {
+  margin: 0 50px;
+}
+
+#select-plant {
+  text-align: center;
+}
+
+#plant-select-form {
+  padding: 100px;
+}
+
+#plant-select-form label {
+  font-size: 18px;
+}
+
+/* new_user plant form ---------------------------- */
+
+/* HIDE RADIO
+[type=radio] { 
+    position: absolute;
+    opacity: 0;
+    width: 0;
+    height: 0;
+  } */
+  
+  /* IMAGE STYLES */
+  [type=radio] + img {
+    cursor: pointer;
+  }
+
+  .plant-select-img {
+    width:auto;
+    height:200px;
+    margin: 20px;
+  }
+  
+  /* CHECKED STYLES */
+  [type=radio]:checked + img {
+    outline: 2px solid #f00;
+  }
+
+#plant-media {
+  padding:0 50px;
+  display:flex;
+  justify-content: space-between;
+  align-items: center;
+}
+::-webkit-file-upload-button {
+  outline: none;
+  border: silver 1px solid;
+  border-radius: 20px;
+  padding: 5px;
+  font: 14px 'Montserrat', sans-serif;
+  cursor: pointer;
+}
+
+.custom-upload {
+  outline: none;
+  border: silver 1px solid;
+  border-radius: 20px;
+  margin: 5px;
+  padding: 5px;
+  font: 14px 'Montserrat', sans-serif;
+  cursor: pointer;
+}
+
+.plant-media-section{
+  height: 300px;
+  background-color: #387771ff;
+  color:white;
+  padding:50px;
+  margin: 50px;
+  border-radius: 20px;
+}
+
+#plant-img {
+  align-items: center;
+  display: flex;
+  background-color: transparent;
+}
+
+#audio-msgs {
+  overflow: scroll;
+}
+
+#plant-media form {
+  text-align: center;
+}
+
+#greeting {
+  display:flex;
+  justify-content: space-evenly;
+  align-items: center;
+  color: #387771ff;
+  padding:20px;
+  border-radius: 20px;
+  margin-top: 0 100px;
+}
+
+#profile h2 {
+  text-align: center;
+}
+
+#profile h3{
+  text-align: center;
+}
+
+#plant-img img{
+  width: 400px;
+  height: auto;
+  border-radius: 15px;
+}
